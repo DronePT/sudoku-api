@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 node:lts-alpine AS build
+FROM --platform=linux/amd64 node:16-slim AS build
 
 WORKDIR /app
 COPY package.json .
@@ -6,7 +6,7 @@ RUN yarn
 COPY . .
 RUN yarn build
 
-FROM --platform=linux/amd64 node:lts-alpine AS production
+FROM --platform=linux/amd64 node:16-slim AS production
 
 ENV TINI_VERSION v0.19.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
